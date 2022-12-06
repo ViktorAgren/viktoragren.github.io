@@ -2,22 +2,32 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Resume</title>
+    <title>My Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
     <style>
-      /* Add styles for your website here */
+      /* Add your own styles here */
     </style>
   </head>
   <body>
     <header>
       <h1>My Name</h1>
       <h2>My Job Title</h2>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
     <main>
-      <section>
+      <section id="about">
         <h3>About Me</h3>
         <p>Add a brief description of yourself here.</p>
       </section>
-      <section>
+      <section id="skills">
         <h3>Skills</h3>
         <ul>
           <li>Add your skills here</li>
@@ -25,17 +35,28 @@
           <li>Make sure to highlight your most important skills</li>
         </ul>
       </section>
-      <section>
+      <section id="experience">
         <h3>Experience</h3>
         <h4>Job Title at Company Name</h4>
         <p>Add a brief description of your role and responsibilities at this job.</p>
         <h4>Another Job Title at Another Company</h4>
         <p>Add a brief description of your role and responsibilities at this job.</p>
       </section>
-      <section>
+      <section id="education">
         <h3>Education</h3>
         <h4>Degree at University Name</h4>
         <p>Add a brief description of your degree and any relevant coursework.</p>
+      </section>
+      <section id="contact">
+        <h3>Contact</h3>
+        <ul>
+          <li><i class="fas fa-envelope"></i> <a href="mailto:myemail@example.com">myemail@example.com</a></li>
+          <li><i class="fas fa-phone"></i> (123) 456-7890</li>
+          <li><i class="fas fa-map-marker-alt"></i> My City, My State</li>
+        </ul>
+      </section>
+    </main>
+        </ul>
       </section>
     </main>
     <footer>
@@ -43,4 +64,3 @@
     </footer>
   </body>
 </html>
-
