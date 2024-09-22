@@ -3,24 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.querySelector('.hamburger');
   const navMenu = document.querySelector('.nav-menu');
 
+  hamburger.addEventListener('click', toggleMobileMenu);
+
   function toggleMobileMenu() {
       hamburger.classList.toggle('active');
       navMenu.classList.toggle('active');
   }
 
-  hamburger.addEventListener('click', toggleMobileMenu);
-
   // Close mobile menu when clicking on a nav link
-  document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-          hamburger.classList.remove('active');
-          navMenu.classList.remove('active');
-      });
-  });
+  document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', closeMobileMenu));
+
+  function closeMobileMenu() {
+      hamburger.classList.remove('active');
+      navMenu.classList.remove('active');
+  }
 
   // Typing Effect
-  new Typed('.typed', {
-      strings: ['Quantitative Analyst', 'Financial Mathematics Graduate', 'Software Developer'],
+  const typed = new Typed('.typed', {
+      strings: ['Software Developer', 'Quantitative Analyst', 'Financial Mathematics Graduate'],
       typeSpeed: 50,
       backSpeed: 30,
       backDelay: 2000,
@@ -37,13 +37,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   filterButtons.forEach(button => {
       button.addEventListener('click', () => {
-          const filterValue = button.getAttribute('data-filter');
-
+          // Remove active class from all buttons
           filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
           button.classList.add('active');
 
+          const filterValue = button.getAttribute('data-filter');
+
           projectItems.forEach(item => {
-              item.style.display = (filterValue === 'all' || item.classList.contains(filterValue)) ? 'block' : 'none';
+              if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                  item.style.display = 'block';
+              } else {
+                  item.style.display = 'none';
+              }
           });
       });
   });
@@ -52,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
           e.preventDefault();
+
           document.querySelector(this.getAttribute('href')).scrollIntoView({
               behavior: 'smooth'
           });
@@ -62,7 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTopButton = document.querySelector('.back-to-top');
 
   window.addEventListener('scroll', () => {
-      backToTopButton.style.display = window.pageYOffset > 300 ? 'block' : 'none';
+      if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('active');
+      } else {
+          backToTopButton.classList.remove('active');
+      }
   });
 
   backToTopButton.addEventListener('click', (e) => {
@@ -78,7 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let current = '';
       sections.forEach(section => {
           const sectionTop = section.offsetTop;
-          if (pageYOffset >= sectionTop - 60) {
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= sectionTop - sectionHeight / 3) {
               current = section.getAttribute('id');
           }
       });
@@ -91,11 +103,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
-  // Initialize AOS
+  // Form Submission
+  const form = document.querySelector('.contact-form');
+  form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Add your form submission logic here
+      console.log('Form submitted');
+      // You can use fetch API or AJAX to send the form data to a server
+  });
+
+  // Initialize AOS (Animate on Scroll)
   AOS.init({
       duration: 1000,
       easing: 'ease-in-out',
       once: true,
       mirror: false
   });
+
+  // Prism.js initialization (for code highlighting)
+  Prism.highlightAll();
 });
