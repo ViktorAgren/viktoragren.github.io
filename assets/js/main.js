@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Typing Effect
   const typed = new Typed('.typed', {
-    strings: ['Financial Mathematics Student', 'Data Analyst', 'Quantitative Researcher'],
+    strings: ['Quantitative Analyst', 'Financial Mathematics Graduate', 'Software Developer'],
     typeSpeed: 50,
     backSpeed: 30,
     backDelay: 2000,
