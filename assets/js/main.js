@@ -23,11 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // Typing Effect
   const typed = new Typed('.typed', {
     strings: ['Financial Mathematics Student', 'Data Analyst', 'Quantitative Researcher'],
-    typeSpeed: 100,
-    backSpeed: 50,
+    typeSpeed: 50,
+    backSpeed: 30,
     backDelay: 2000,
-    loop: true
-  });
+    startDelay: 1000,
+    loop: true,
+    showCursor: true,
+    cursorChar: '|',
+    autoInsertCss: true,
+});
+
 
   // Project Filtering
   const filterButtons = document.querySelectorAll('.filter-btn');
