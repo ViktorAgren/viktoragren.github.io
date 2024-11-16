@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "version": "0.1.0",
-  "homepage": "https://viktoragren.github.io/",
+  "homepage": "https://viktoragren.github.io/viktoragren.github.io",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
