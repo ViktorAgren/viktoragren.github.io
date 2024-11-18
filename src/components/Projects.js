@@ -18,73 +18,56 @@ export const Projects = () => {
 
   const projects = [
     {
-      title: "PROJECT NAME",
-      description: "PROJECT DESC",
-      category: "software",
+      title: "Black-Scholes Option Calculator",
+      description: "Interactive visualization of the Black-Scholes option pricing model with Greeks calculation",
+      category: "finance",
       stats: {
-        status: "LIVE",
-        version: "2.1.0",
+        status: "DEV",
+        version: "0.1.0",
         uptime: "99.9%",
-        lastUpdate: "2024-02"
+        lastUpdate: "2024-11"
       },
-      tags: ["PYTHON", "REACT", "TENSORFLOW", "AWS"],
+      tags: ["FIN MATH", "REACT", "JS"],
       links: {
-        github: "https://github.com/viktoragren/project",
-        live: "https://viktoragren.github.io/"
+        github: "https://github.com/yourusername/black-scholes-visualizer",
+        live: "https://viktoragren.github.io/black-scholes-visualizer"
       },
       icon: <LineChart className="w-4 h-4 text-green-500" />
     },
     {
-      title: "PROJECT NAME",
-      description: "PROJECT DESC",
-      category: "finance",
+      title: "Fantasy Premier League Dashboard",
+      description: "End-to-end data pipeline and analytics platform for FPL managers. Integrates live API data, custom statistical models, and interactive visualizations for optimized team selection and performance analysis.",
+      category: "data-science",
       stats: {
-        status: "BETA",
+        status: "DEV",
         version: "1.5.0",
         uptime: "98.5%",
         lastUpdate: "2024-03"
       },
-      tags: ["D3.JS", "PYTHON", "FLASK", "REDIS"],
+      tags: ["REACT", "PYTHON", "FLASK", "API"],
       links: {
-        github: "https://github.com/viktoragren/project",
+        github: "https://github.com/viktoragren/fpl-stats-dashboard",
         live: "https://viktoragren.github.io/"
       },
       icon: <Database className="w-4 h-4 text-green-500" />
     },
     {
-      title: "PROJECT NAME",
-      description: "PROJECT DESC",
-      category: "data-science",
+      title: "Blog Style Scientific Journal",
+      description: "Interactive publishing platform for quantitative research and mathematical analysis. Features LaTeX rendering, dynamic data visualizations, and customizable article templates. Built with React for seamless user experience and Python backend for data processing.",
+      category: "mathematics",
       stats: {
         status: "DEV",
         version: "0.9.0",
         uptime: "97.8%",
         lastUpdate: "2024-04"
       },
-      tags: ["PYTHON", "TENSORFLOW", "PANDAS", "SCIKIT"],
+      tags: ["TeX", "REACT", "RECHART", "PYTHON"],
       links: {
-        github: "https://github.com/viktoragren/project",
-        live: "https://viktoragren.github.io/"
+        github: "https://github.com/viktoragren/ridge-regression",
+        live: "https://viktoragren.github.io/ridge-regression"
       },
       icon: <Code className="w-4 h-4 text-green-500" />
-    },
-    {
-    title: "PROJECT NAME",
-    description: "PROJECT DESC",
-    category: "mathematics",
-    stats: {
-      status: "DEV",
-      version: "0.9.0",
-      uptime: "97.8%",
-      lastUpdate: "2024-04"
-    },
-    tags: ["PYTHON", "TENSORFLOW", "PANDAS", "SCIKIT"],
-    links: {
-      github: "https://github.com/viktoragren/project",
-      live: "https://viktoragren.github.io/"
-    },
-    icon: <Code className="w-4 h-4 text-green-500" />
-  }
+     }
   ];
 
   const filteredProjects = projects.filter(project => 

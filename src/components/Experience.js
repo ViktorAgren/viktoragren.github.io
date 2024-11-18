@@ -3,8 +3,6 @@ import {
   Terminal, 
   Clock, 
   Briefcase,
-  Calendar,
-  GitBranch,
   Activity,
   Award,
   ChevronRight
@@ -14,7 +12,7 @@ const experiences = [
   {
     title: "SWEDISH FUND SELECTION AGENCY",
     position: "QUANTITATIVE ANALYST",
-    period: "AUG 2021 - PRESENT",
+    period: "AUG 2023 - PRESENT",
     status: "ACTIVE",
     department: "QUANTITATIVE ANALYSIS",
     location: "STOCKHOLM, SWE",
@@ -30,7 +28,6 @@ const experiences = [
       "AUTOMATED ANALYSIS AND REPORTING SYSTEMS"
     ]
   }
-  // Add more experiences as needed
 ];
 
 export const Experience = () => {

@@ -122,7 +122,6 @@ export const Hero = () => {
                 <div className="text-xs space-y-1">
                   <p>PYTHON • SQL • GIT</p>
                   <p>R • Matlab • C#</p>
-                  <p>HTML • CSS • JS</p>
                 </div>
               </div>
 
@@ -132,7 +131,6 @@ export const Hero = () => {
                   <span className="text-xs">SPECIALIZATION</span>
                 </div>
                 <div className="text-xs space-y-1">
-                  <p>ALGORITHMIC TRADING</p>
                   <p>QUANTITATIVE ANALYSIS</p>
                   <p>FINANCIAL MATHEMATICS</p>
                 </div>

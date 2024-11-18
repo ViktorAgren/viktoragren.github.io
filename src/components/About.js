@@ -5,8 +5,6 @@ import {
   Briefcase, 
   GraduationCap,
   User,
-  Mail,
-  MapPin,
   Clock,
   Terminal,
   Code
@@ -110,7 +108,7 @@ export const About = () => {
                   <li>Financial mathematics and timeseries Analysis</li>
                   <li>Complex data analysis and illustration</li>
                   <li>Scalable software architecture and development</li>
-                  <li>Risk analysis and portfolio optimization</li>
+                  <li>Attribution, risk analysis, and portfolio analysis</li>
                 </ul>
               </div>
             </div>
@@ -122,10 +120,10 @@ export const About = () => {
               </div>
               <div className="text-xs space-y-4">
                 <p className="text-white leading-relaxed">
-                  {`>> SPECIALIZED IN DEVELOPING INNOVATIVE SOLUTIONS THAT BRIDGE THE GAP BETWEEN COMPLEX FINANCIAL ANALYSIS AND MODERN TECHNOLOGY. EXPERIENCED IN BUILDING SCALABLE APPLICATIONS THAT SOLVE REAL-WORLD FINANCIAL PROBLEMS.`}
+                  {`>> TRANSFORMING COMPLEX FINANCIAL DATA INTO ACTIONABLE INVESTMENT INSIGHTS. SPECIALIZED IN QUANTITATIVE ANALYSIS AND PORTFOLIO OPTIMIZATION.`}
                 </p>
                 <p className="text-white leading-relaxed">
-                  {`>> COMBINING RIGOROUS MATHEMATICAL MODELING WITH CLEAN, MAINTAINABLE CODE TO CREATE EFFICIENT AND RELIABLE SYSTEMS.`}
+                  {`>> ENGINEERING ROBUST SOFTWARE SOLUTIONS WITH AN EMPHASIS ON MATHEMATICAL PRECISION. DEDICATED TO CLEAN CODE AND SYSTEM RELIABILITY.`}
                 </p>
               </div>
             </div>

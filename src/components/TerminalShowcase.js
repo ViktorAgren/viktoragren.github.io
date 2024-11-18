@@ -10,11 +10,7 @@ import {
 } from 'recharts';
 import { 
   Terminal, 
-  Activity, 
-  AlertCircle, 
-  Briefcase,
-  ArrowUp,
-  ArrowDown,
+  Activity,
   Clock
 } from 'lucide-react';
 
@@ -42,7 +38,7 @@ export const TerminalShowcase = () => {
     history: []
   });
 
-  // Generate realistic price movements
+  // price movements
   const generateNewPrice = () => {
     const momentum = 0.7;
     const meanReversion = 0.1;
@@ -61,7 +57,7 @@ export const TerminalShowcase = () => {
     return newPrice;
   };
 
-  // Initialize price data
+  // price data
   useEffect(() => {
     const initialData = [];
     let lastPrice = 100;
@@ -80,7 +76,7 @@ export const TerminalShowcase = () => {
     setCurrentPrice(lastPrice);
   }, []);
 
-  // Simulate real-time price updates
+  // price updates
   useEffect(() => {
     if (isTrading) {
       const interval = setInterval(() => {
@@ -278,7 +274,7 @@ export const TerminalShowcase = () => {
     }
   };
 
-  // Calculate price change for color
+  // color
   const priceChange = priceData.length > 1 
     ? priceData[priceData.length - 1].price - priceData[priceData.length - 2].price 
     : 0;

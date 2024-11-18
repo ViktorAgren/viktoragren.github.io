@@ -1,200 +1,129 @@
-import React, { useEffect, useState } from 'react';
-import { Mail, MapPin, Globe, Terminal, Clock, Activity, Network } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { Mail, MapPin, Globe, Terminal } from 'lucide-react';
 
-// Tech hub data for visualization
-const techHubs = [
-  { id: 1, name: 'STOCKHOLM', x: 200, y: 150, connections: [2, 3], size: 20 },
-  { id: 2, name: 'UPPSALA', x: 200, y: 100, connections: [1], size: 15, current: true },
-  { id: 3, name: 'GOTHENBURG', x: 100, y: 200, connections: [1], size: 12 },
-  { id: 4, name: 'MALMÖ', x: 150, y: 300, connections: [3], size: 12 },
-  { id: 5, name: 'LINKÖPING', x: 250, y: 200, connections: [1, 2], size: 10 }
-];
-
-export const Contact = () => {
-  const [activeNode, setActiveNode] = useState(null);
-  const [networkStatus, setNetworkStatus] = useState([]);
+const MatrixRain = () => {
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    // Simulate network activity logs
-    const interval = setInterval(() => {
-      setNetworkStatus(prev => {
-        const newStatus = [
-          `Connection established with ${techHubs[Math.floor(Math.random() * techHubs.length)].name}`,
-          ...prev
-        ].slice(0, 5);
-        return newStatus;
-      });
-    }, 3000);
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    
+    // Set canvas size
+    const setCanvasSize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    setCanvasSize();
+    window.addEventListener('resize', setCanvasSize);
 
-    return () => clearInterval(interval);
+    // Matrix characters
+    const chars = '0123456789ABCDEF'.split('');
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(0);
+    
+    // Animation settings
+    let fadeStrength = 0.05;
+    
+    const draw = () => {
+      // Create fade effect
+      ctx.fillStyle = `rgba(0, 0, 0, ${fadeStrength})`;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Set text properties
+      ctx.fillStyle = '#0f0';
+      ctx.font = `${fontSize}px monospace`;
+
+      // Draw characters
+      drops.forEach((y, i) => {
+        // Generate random character
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        const x = i * fontSize;
+        
+        ctx.fillStyle = `rgba(0, 255, 0, ${Math.random()})`;
+        ctx.fillText(char, x, y);
+
+        // Reset drop or move it down
+        if (y > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        } else {
+          drops[i] += fontSize;
+        }
+      });
+    };
+
+    // Animation loop
+    const interval = setInterval(draw, 50);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', setCanvasSize);
+    };
   }, []);
 
-  const SwedenMap = () => (
-    <svg viewBox="0 0 400 400" className="w-full h-full">
-      {/* Connection lines */}
-      {techHubs.map(hub => 
-        hub.connections.map(connId => {
-          const connectedHub = techHubs.find(h => h.id === connId);
-          return (
-            <g key={`${hub.id}-${connId}`}>
-              <line
-                x1={hub.x}
-                y1={hub.y}
-                x2={connectedHub.x}
-                y2={connectedHub.y}
-                stroke="#0f766e"
-                strokeWidth="1"
-                className="animate-pulse"
-              />
-              {/* Data flow animation */}
-              <circle className="animate-ping-slow">
-                <animateMotion
-                  dur="3s"
-                  repeatCount="indefinite"
-                  path={`M${hub.x},${hub.y} L${connectedHub.x},${connectedHub.y}`}
-                />
-              </circle>
-            </g>
-          );
-        })
-      )}
-
-      {/* Tech hub nodes */}
-      {techHubs.map(hub => (
-        <g
-          key={hub.id}
-          transform={`translate(${hub.x},${hub.y})`}
-          onMouseEnter={() => setActiveNode(hub)}
-          onMouseLeave={() => setActiveNode(null)}
-          className="cursor-pointer"
-        >
-          <circle
-            r={hub.size / 2}
-            fill={hub.current ? '#059669' : '#1f2937'}
-            stroke="#0f766e"
-            strokeWidth="2"
-            className={`${hub.current ? 'animate-pulse' : ''}`}
-          />
-          <text
-            y={hub.size + 10}
-            textAnchor="middle"
-            fill="#6ee7b7"
-            className="text-[8px]"
-          >
-            {hub.name}
-          </text>
-        </g>
-      ))}
-    </svg>
-  );
-
   return (
-    <section id="contact" className="min-h-screen bg-black text-green-500 font-mono py-20">
-      <div className="container mx-auto px-4">
-        {/* Terminal Header */}
-        <div className="border border-green-900 p-2 mb-4 flex items-center justify-between bg-black">
-          <div className="flex items-center gap-2">
+    <canvas 
+      ref={canvasRef} 
+      className="absolute top-0 left-0 w-full h-full"
+      style={{ opacity: 0.2 }}
+    />
+  );
+};
+
+export const Contact = () => {
+  return (
+    <section className="relative min-h-screen bg-black text-green-500 font-mono py-20 overflow-hidden">
+      <MatrixRain />
+      
+      <div className="container relative mx-auto px-4">
+        {/* Terminal Window */}
+        <div className="max-w-3xl mx-auto backdrop-blur-sm">
+          {/* Terminal Header */}
+          <div className="border border-green-900 p-2 flex items-center gap-2 bg-black/90">
             <Terminal size={14} />
-            <span className="text-xs">NETWORK_TERMINAL <span className="text-green-600">{`<F6>`}</span></span>
+            <span className="text-xs">MATRIX_TERMINAL <span className="text-green-600">{`<F6>`}</span></span>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock size={14} />
-            <span className="text-xs">{new Date().toLocaleTimeString()}</span>
-          </div>
-        </div>
 
-        <div className="grid grid-cols-12 gap-4">
-          {/* Contact Info Panel */}
-          <div className="col-span-4 space-y-4">
-            <div className="border border-green-900 p-4 bg-black">
-              <div className="flex items-center gap-2 mb-4">
-                <Activity size={14} />
-                <span className="text-xs text-green-600">CONTACT INFO</span>
+          {/* Contact Content */}
+          <div className="border-l border-r border-b border-green-900 p-8 bg-black/90">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl mb-4 animate-pulse">CONNECTION ESTABLISHED</h2>
+              <p className="text-sm text-green-400">/* SECURE CHANNEL ACTIVATED */</p>
+            </div>
+
+            <div className="grid gap-8 max-w-lg mx-auto">
+              <div className="border border-green-900/50 p-6 backdrop-blur-md hover:border-green-500 transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                  <Mail className="w-4 h-4" />
+                  <span className="text-xs text-green-600">EMAIL</span>
+                </div>
+                <a href="mailto:99viktor.agren@gmail.com" className="text-white hover:text-green-500 transition-colors">
+                  99VIKTOR.AGREN@GMAIL.COM
+                </a>
               </div>
-              <div className="space-y-4">
-                <div className="text-xs">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Mail size={12} />
-                    <span className="text-green-600">EMAIL</span>
-                  </div>
-                  <a href="mailto:99viktor.agren@gmail.com" className="text-white hover:text-green-500">
-                    99VIKTOR.AGREN@GMAIL.COM
-                  </a>
+
+              <div className="border border-green-900/50 p-6 backdrop-blur-md hover:border-green-500 transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                  <MapPin className="w-4 h-4" />
+                  <span className="text-xs text-green-600">LOCATION</span>
                 </div>
-                <div className="text-xs">
-                  <div className="flex items-center gap-2 mb-1">
-                    <MapPin size={12} />
-                    <span className="text-green-600">LOCATION</span>
-                  </div>
-                  <span className="text-white">STOCKHOLM, SWEDEN</span>
+                <span className="text-white">STOCKHOLM, SWEDEN</span>
+              </div>
+
+              <div className="border border-green-900/50 p-6 backdrop-blur-md hover:border-green-500 transition-colors">
+                <div className="flex items-center gap-3 mb-4">
+                  <Globe className="w-4 h-4" />
+                  <span className="text-xs text-green-600">TIMEZONE</span>
                 </div>
-                <div className="text-xs">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Globe size={12} />
-                    <span className="text-green-600">TIMEZONE</span>
-                  </div>
-                  <span className="text-white">CET (UTC+1)</span>
-                </div>
+                <span className="text-white">CET (UTC+1)</span>
               </div>
             </div>
 
-            {/* Network Status */}
-            <div className="border border-green-900 p-4 bg-black">
-              <div className="flex items-center gap-2 mb-4">
-                <Network size={14} />
-                <span className="text-xs text-green-600">NETWORK STATUS</span>
-              </div>
-              <div className="text-xs space-y-2">
-                {networkStatus.map((status, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <span className="text-green-600">&gt;</span>
-                    <span className="text-white">{status}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Active Node Info */}
-            {activeNode && (
-              <div className="border border-green-900 p-4 bg-black">
-                <div className="flex items-center gap-2 mb-4">
-                  <Activity size={14} />
-                  <span className="text-xs text-green-600">NODE DETAILS</span>
-                </div>
-                <div className="text-xs space-y-2">
-                  <div className="flex justify-between">
-                    <span>LOCATION</span>
-                    <span className="text-white">{activeNode.name}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>CONNECTIONS</span>
-                    <span className="text-white">{activeNode.connections.length}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>STATUS</span>
-                    <span className="text-green-400">ACTIVE</span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Map Visualization */}
-          <div className="col-span-8">
-            <div className="border border-green-900 bg-black h-full">
-              <div className="border-b border-green-900 p-2">
-                <span className="text-xs text-green-600">NETWORK_MAP</span>
-              </div>
-              <div className="p-4 h-[600px]">
-                <SwedenMap />
-              </div>
-              
-              {/* Terminal Output */}
-              <div className="border-t border-green-900 p-4">
-                <div className="text-xs space-y-1">
-                  <p>{`>> Network monitoring active`}</p>
-                  <p>{`>> Hover over nodes for details`}</p>
-                </div>
+            <div className="mt-12 text-center text-xs">
+              <div className="inline-block border border-green-900/50 px-4 py-2">
+                <span className="text-green-600">STATUS: </span>
+                <span className="text-white">READY TO CONNECT </span>
+                <span className="animate-pulse">_</span>
               </div>
             </div>
           </div>
@@ -203,3 +132,5 @@ export const Contact = () => {
     </section>
   );
 };
+
+export default Contact;

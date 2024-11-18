@@ -18,6 +18,8 @@ function App() {
       easing: 'ease-out-cubic',
       once: true,
     });
+    
+    window.scrollTo(0, 0);
   }, []);
 
   return (

@@ -2,17 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {
   Code,
   Database,
-  Settings,
   Layout,
   Terminal,
   Clock,
-  Cpu,
   GitBranch,
   Server,
   Activity,
-  CheckCircle2,
-  Globe,
-  Layers
+  CheckCircle2
 } from 'lucide-react';
 
 const skillCategories = [
@@ -24,21 +20,21 @@ const skillCategories = [
       { 
         name: "PYTHON",
         detail: "Backend Development • Data Processing • Analysis • Visualization",
-        projects: "X",
-        expertise: ["NumPy", "Pandas", "SciPy", "BeautifulSoup"],
-        status: "ACTIVE"
+        projects: "TIMESERIES ANALYSIS, ATTRIBUTION, FUND RANKING",
+        expertise: ["NumPy", "Pandas", "SciPy", "scikit-learn"],
+        status: "LEARNING"
       },
       { 
         name: "SQL",
-        detail: "Database Management • Query Optimization",
-        projects: "X",
-        expertise: ["MSSQL", "T-SQL"],
-        status: "ACTIVE"
+        detail: "Database Management • Data Integration ",
+        projects: "ETL, DATA PIPELINE, DATABASE LIBRARY",
+        expertise: ["MSSQL", "T-SQL", "pyodbc", "sqlalchemy"],
+        status: "LEARNING"
       },
       { 
         name: "JAVASCRIPT",
         detail: "Frontend • Node.js • Full Stack Development",
-        projects: "X",
+        projects: "JOURNAL APP, FPL DASHBOARD, PERSONAL WEBSITE",
         expertise: ["React", "Node.js"],
         status: "LEARNING"
       },
@@ -66,22 +62,22 @@ const skillCategories = [
       {
         name: "REACT.JS",
         detail: "Component Architecture • State Management • UI Development",
-        projects: 10,
-        expertise: ["Redux", "Hooks", "Next.js", "Tailwind"],
+        projects: "X",
+        expertise: ["Next.js", "Tailwind"],
         status: "LEARNING"
       },
       {
         name: "WEB TECHNOLOGIES",
         detail: "Modern Web Development Stack",
-        projects: 12,
-        expertise: ["HTML5", "CSS3", "ES6+", "WebSockets"],
+        projects: "X",
+        expertise: ["HTML5", "CSS3"],
         status: "LEARNING"
       },
       {
         name: "UI FRAMEWORKS",
         detail: "CSS Frameworks & Component Libraries",
-        projects: 8,
-        expertise: ["Tailwind", "Material-UI", "Bootstrap"],
+        projects: "X",
+        expertise: ["Tailwind"],
         status: "LEARNING"
       }
     ]
@@ -94,15 +90,15 @@ const skillCategories = [
       {
         name: "NODE.JS",
         detail: "Server-side JavaScript • API Development",
-        projects: 8,
-        expertise: ["Express.js", "REST APIs", "GraphQL", "JWT"],
+        projects: "X",
+        expertise: ["REST APIs"],
         status: "LEARNING"
       },
       {
         name: "DATABASES",
         detail: "Database Design & Management",
-        projects: 10,
-        expertise: ["PostgreSQL", "MongoDB", "Redis", "ORM"],
+        projects: "X",
+        expertise: ["MSSQL"],
         status: "LEARNING"
       }
     ]
@@ -113,10 +109,17 @@ const skillCategories = [
     description: "Development Operations & Tools",
     skills: [
       {
+        name: "ORCHESTRATION",
+        detail: "Data Pipeline & Workflow Management",
+        projects: "ETL",
+        expertise: ["Prefect"],
+        status: "LEARNING"
+      },
+      {
         name: "CLOUD SERVICES",
         detail: "Cloud Infrastructure & Deployment",
-        projects: 7,
-        expertise: ["AWS", "Docker"],
+        projects: "X",
+        expertise: ["Docker"],
         status: "LEARNING"
       },
       {
@@ -127,11 +130,18 @@ const skillCategories = [
         status: "LEARNING"
       },
       {
+        name: "VISUALIZATION",
+        detail: "Data Analysis & Reporting",
+        projects: "Dashboard",
+        expertise: ["Power BI"],
+        status: "LEARNING"
+      },
+      {
         name: "DEVELOPMENT TOOLS",
         detail: "Development Environment & Testing",
         projects: "X",
         expertise: ["VS Code", "PyCharm"],
-        status: "ACTIVE"
+        status: "LEARNING"
       }
     ]
   },
@@ -143,23 +153,23 @@ const skillCategories = [
       {
         name: "DATA PROCESSING",
         detail: "ETL • Data Analysis • Visualization",
-        projects: 8,
+        projects: "X",
         expertise: ["Pandas", "NumPy", "Matplotlib", "Jupyter"],
-        status: "ACTIVE"
+        status: "LEARNING"
       },
       {
         name: "MACHINE LEARNING",
         detail: "ML Libraries & Frameworks",
-        projects: 5,
+        projects: "X",
         expertise: ["TensorFlow", "scikit-learn", "PyTorch"],
         status: "LEARNING"
       },
       {
         name: "BIG DATA",
         detail: "Large Scale Data Processing",
-        projects: 4,
-        expertise: ["Spark", "Hadoop", "Data Pipelines"],
-        status: "MAINTAINED"
+        projects: "X",
+        expertise: ["Data Pipelines"],
+        status: "LEARNING"
       }
     ]
   }
@@ -171,7 +181,7 @@ export const Skills = () => {
   const [commandLog, setCommandLog] = useState(['System initialized...', 'Loading skill matrix...']);
 
   useEffect(() => {
-    // Simulate terminal initialization
+    // terminal initialization
     const timer = setInterval(() => {
       setCommandLog(prev => [...prev, `Scanning ${activeCategory.toLowerCase()} modules...`]);
     }, 3000);
