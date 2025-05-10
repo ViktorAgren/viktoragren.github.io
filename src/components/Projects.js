@@ -29,7 +29,7 @@ export const Projects = () => {
       },
       tags: ["FIN MATH", "REACT", "JS"],
       links: {
-        github: "https://github.com/yourusername/black-scholes-visualizer",
+        github: "https://github.com/viktoragren/black-scholes-visualizer",
         live: "https://viktoragren.github.io/black-scholes-visualizer"
       },
       icon: <LineChart className="w-4 h-4 text-green-500" />
