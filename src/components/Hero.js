@@ -117,7 +117,7 @@ export const Hero = () => {
               <div className="border border-green-900 p-3">
                 <div className="flex items-center gap-2 mb-2">
                   <Monitor size={14} />
-                  <span className="text-xs">TECH STACK</span>
+                  <span className="text-xs">TECH STACK TEST</span>
                 </div>
                 <div className="text-xs space-y-1">
                   <p>PYTHON • SQL • GIT</p>
