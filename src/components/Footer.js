@@ -1,5 +1,5 @@
-import React from 'react';
-import { Terminal, Activity, Coffee, Wifi } from 'lucide-react';
+import React from "react";
+import { Terminal, Activity, Coffee, Wifi } from "lucide-react";
 
 export const Footer = () => {
   return (

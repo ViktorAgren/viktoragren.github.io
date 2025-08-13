@@ -1,23 +1,210 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Typed from 'typed.js';
-import { 
-  Terminal, 
-  TrendingUp, 
-  Clock, 
-  Globe, 
-  Coffee,
-  Activity,
-  Monitor,
-  Cpu
-} from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import Typed from "typed.js";
+import { Terminal, Clock, Globe, Activity, Monitor, Cpu, Maximize } from "lucide-react";
+import { useTerminalMode } from "../contexts/TerminalModeContext";
 
 export const Hero = () => {
+  const { enterTerminalMode } = useTerminalMode();
   const typedRef = useRef(null);
+  const terminalInputRef = useRef(null);
+  const terminalOutputRef = useRef(null);
   const [time, setTime] = useState(new Date());
+  const [command, setCommand] = useState("");
+  const [commandHistory, setCommandHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [terminalOutput, setTerminalOutput] = useState([
+    { type: "info", text: "Welcome to VIKTOR_TERMINAL v1.0.0" },
+    { type: "info", text: 'Type "help" to see available commands or "terminal" for full mode' },
+  ]);
+
+  // Terminal commands system
+  const commands = {
+    help: () => ({
+      type: "success",
+      text: [
+        "Available commands:",
+        "  help        - Show this help message",
+        "  about       - Display personal information",
+        "  skills      - Show technical skills",
+        "  projects    - List recent projects",
+        "  contact     - Get contact information",
+        "  cd <dir>    - Navigate to section (about, skills, projects, contact)",
+        "  resume      - Open resume in new tab",
+        "  clear       - Clear terminal",
+        "  whoami      - Display current user info",
+        "  ls          - List directory contents",
+        "  date        - Show current date and time",
+        "  uptime      - Show portfolio uptime",
+        "  terminal    - Enter full-screen terminal mode",
+        "",
+        "Use arrow keys (↑↓) to navigate command history",
+        "Press Ctrl+T to toggle full terminal mode",
+      ],
+    }),
+    about: () => ({
+      type: "info",
+      text: [
+        "VIKTOR ÅGREN - Quantitative Analyst & Software Developer",
+        "Location: Stockholm, Sweden",
+        "Education: MSc Financial Mathematics",
+        "Experience: 1+ years in quantitative finance",
+        "Specialization: Financial modeling, data analysis, software architecture",
+      ],
+    }),
+    skills: () => ({
+      type: "info",
+      text: [
+        "Technical Skills:",
+        "  Languages: Python, JavaScript, SQL, C#, MATLAB",
+        "  Frontend:  React, HTML5, CSS3, Tailwind CSS",
+        "  Backend:   Node.js, Flask, REST APIs",
+        "  Data:      NumPy, Pandas, scikit-learn, Power BI",
+        "  Tools:     Git, Docker, VS Code, Jupyter",
+      ],
+    }),
+    projects: () => ({
+      type: "info",
+      text: [
+        "Recent Projects:",
+        "  [1] Black-Scholes Option Calculator - Financial modeling tool",
+        "  [2] FPL Analytics Dashboard - Data visualization platform",
+        "  [3] Mathematical Journal - LaTeX publishing system",
+        "Use 'cd projects' to explore projects section",
+      ],
+    }),
+    contact: () => ({
+      type: "success",
+      text: [
+        "Contact Information:",
+        "  Email: 99viktor.agren@gmail.com",
+        "  Location: Stockholm, Sweden",
+        "  Timezone: CET (UTC+1)",
+        "  Status: Available for opportunities",
+      ],
+    }),
+    whoami: () => ({
+      type: "info",
+      text: "viktor@portfolio:~$ Quantitative Analyst & Developer",
+    }),
+    ls: () => ({
+      type: "info",
+      text: ["about.md  projects/  skills.json  contact.txt  resume.pdf"],
+    }),
+    clear: () => {
+      setTerminalOutput([]);
+      return null;
+    },
+    cd: (args) => {
+      if (args === "projects") {
+        document
+          .getElementById("projects")
+          ?.scrollIntoView({ behavior: "smooth" });
+        return { type: "success", text: "Navigating to projects section..." };
+      } else if (args === "about") {
+        document
+          .getElementById("about")
+          ?.scrollIntoView({ behavior: "smooth" });
+        return { type: "success", text: "Navigating to about section..." };
+      } else if (args === "skills") {
+        document
+          .getElementById("skills")
+          ?.scrollIntoView({ behavior: "smooth" });
+        return { type: "success", text: "Navigating to skills section..." };
+      } else if (args === "contact") {
+        document
+          .getElementById("contact")
+          ?.scrollIntoView({ behavior: "smooth" });
+        return { type: "success", text: "Navigating to contact section..." };
+      } else {
+        return {
+          type: "error",
+          text: `Directory not found: ${args}. Available: about, skills, projects, contact`,
+        };
+      }
+    },
+    resume: () => {
+      window.open("/resume.pdf", "_blank");
+      return { type: "success", text: "Opening resume in new tab..." };
+    },
+    date: () => ({
+      type: "info",
+      text: new Date().toLocaleString(),
+    }),
+    uptime: () => ({
+      type: "info",
+      text: "Portfolio uptime: 99.9% | Last deployed: 2024-12",
+    }),
+    terminal: () => {
+      enterTerminalMode();
+      return { type: "success", text: "Entering full-screen terminal mode..." };
+    },
+  };
+
+  const executeCommand = (cmd) => {
+    const [command, ...args] = cmd.trim().toLowerCase().split(" ");
+    const argString = args.join(" ");
+
+    // Add command to output
+    setTerminalOutput((prev) => [
+      ...prev,
+      { type: "command", text: `viktor@portfolio:~$ ${cmd}` },
+    ]);
+
+    // Add to history
+    if (cmd.trim()) {
+      setCommandHistory((prev) => [cmd, ...prev.slice(0, 49)]); // Keep last 50 commands
+      setHistoryIndex(-1);
+    }
+
+    // Execute command
+    if (commands[command]) {
+      const result = commands[command](argString);
+      if (result) {
+        setTerminalOutput((prev) => [...prev, result]);
+      }
+    } else if (command) {
+      setTerminalOutput((prev) => [
+        ...prev,
+        {
+          type: "error",
+          text: `Command not found: ${command}. Type 'help' for available commands.`,
+        },
+      ]);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      executeCommand(command);
+      setCommand("");
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (historyIndex < commandHistory.length - 1) {
+        const newIndex = historyIndex + 1;
+        setHistoryIndex(newIndex);
+        setCommand(commandHistory[newIndex]);
+      }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setCommand(commandHistory[newIndex]);
+      } else if (historyIndex === 0) {
+        setHistoryIndex(-1);
+        setCommand("");
+      }
+    }
+  };
 
   useEffect(() => {
     const typed = new Typed(typedRef.current, {
-      strings: ['Software Developer', 'Quantitative Analyst', 'Financial Mathematics Graduate'],
+      strings: [
+        "Software Developer",
+        "Quantitative Analyst",
+        "Financial Mathematics Graduate",
+      ],
       typeSpeed: 50,
       backSpeed: 30,
       backDelay: 2000,
@@ -35,8 +222,18 @@ export const Hero = () => {
     };
   }, []);
 
+  // Auto-scroll terminal to bottom when new output is added
+  useEffect(() => {
+    if (terminalOutputRef.current) {
+      terminalOutputRef.current.scrollTop = terminalOutputRef.current.scrollHeight;
+    }
+  }, [terminalOutput]);
+
   return (
-    <section className="min-h-screen bg-black text-green-500 font-mono">
+    <section
+      id="home"
+      className="min-h-screen bg-black text-green-500 font-mono relative"
+    >
       {/* Terminal Header */}
       <div className="border-b border-green-900 p-2 flex justify-between items-center bg-black">
         <div className="flex items-center gap-3">
@@ -87,11 +284,11 @@ export const Hero = () => {
               </div>
               <div className="flex justify-between">
                 <span>PROJ</span>
-                <span className="text-white">X</span>
+                <span className="text-white">10+</span>
               </div>
               <div className="flex justify-between">
                 <span>TECH</span>
-                <span className="text-white">X</span>
+                <span className="text-white">15+</span>
               </div>
             </div>
           </div>
@@ -107,7 +304,9 @@ export const Hero = () => {
 
             <div className="mb-8">
               <p className="text-xs text-green-600 mb-1">CMD:</p>
-              <h1 className="text-2xl text-white font-bold mb-2">VIKTOR ÅGREN</h1>
+              <h1 className="text-2xl text-white font-bold mb-2">
+                VIKTOR ÅGREN
+              </h1>
               <div className="text-sm mb-4">
                 I'm a <span ref={typedRef} className="text-white"></span>
               </div>
@@ -137,12 +336,62 @@ export const Hero = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <p className="text-xs">{`>> Type "PROJ" to view projects`}</p>
-              <p className="text-xs">{`>> Type "CONT" to contact`}</p>
-              <p className="text-xs">{`>> Type "HELP" for more commands`}</p>
+            {/* Terminal Output */}
+            <div ref={terminalOutputRef} className="mb-4 h-52 overflow-y-auto text-xs">
+              {terminalOutput.map((output, index) => (
+                <div key={index} className="mb-1">
+                  {output.type === "command" && (
+                    <div className="text-green-400">{output.text}</div>
+                  )}
+                  {output.type === "info" && (
+                    <div className="text-white">
+                      {Array.isArray(output.text)
+                        ? output.text.map((line, i) => (
+                            <div key={i}>{line}</div>
+                          ))
+                        : output.text}
+                    </div>
+                  )}
+                  {output.type === "success" && (
+                    <div className="text-green-500">
+                      {Array.isArray(output.text)
+                        ? output.text.map((line, i) => (
+                            <div key={i}>{line}</div>
+                          ))
+                        : output.text}
+                    </div>
+                  )}
+                  {output.type === "error" && (
+                    <div className="text-red-500">{output.text}</div>
+                  )}
+                </div>
+              ))}
             </div>
 
+            {/* Terminal Input */}
+            <div className="flex items-center gap-2 border-t border-green-900 pt-2">
+              <span className="text-green-400 text-xs">
+                viktor@portfolio:~$
+              </span>
+              <input
+                ref={terminalInputRef}
+                type="text"
+                value={command}
+                onChange={(e) => setCommand(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="flex-1 bg-transparent text-white text-xs outline-none"
+                placeholder="Type 'help' for available commands..."
+                autoFocus
+              />
+              <button
+                onClick={enterTerminalMode}
+                className="text-green-500 hover:text-white transition-colors"
+                title="Enter Full Terminal Mode (Ctrl+T)"
+              >
+                <Maximize size={12} />
+              </button>
+              <span className="text-green-500 animate-pulse">_</span>
+            </div>
           </div>
         </div>
       </div>

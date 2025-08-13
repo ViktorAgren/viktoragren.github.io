@@ -1,90 +1,56 @@
-import React from 'react';
-import { 
-  Award, 
-  Book, 
-  Briefcase, 
-  GraduationCap,
-  User,
-  Clock,
-  Terminal,
-  Code
-} from 'lucide-react';
+import React from "react";
+import { User, Clock, Terminal, Code } from "lucide-react";
+import {
+  profileDetails,
+  highlights,
+  profileSummary,
+  experience,
+} from "../data/profile";
+import { TerminalPanel, DataField } from "./ui/TerminalPanel";
+import { TerminalHeader } from "./ui/TerminalCursor";
 
 export const About = () => {
-  const highlights = [
-    {
-      icon: <Award className="w-5 h-5 text-green-500" />,
-      title: "EXPERIENCE",
-      description: "1+ YRS FINANCE"
-    },
-    {
-      icon: <Book className="w-5 h-5 text-green-500" />,
-      title: "EDUCATION",
-      description: "MSC FINANCIAL MATHEMATICS"
-    },
-    {
-      icon: <Briefcase className="w-5 h-5 text-green-500" />,
-      title: "PROJECTS",
-      description: "X"
-    },
-    {
-      icon: <GraduationCap className="w-5 h-5 text-green-500" />,
-      title: "EXPERTISE",
-      description: "X"
-    }
-  ];
-
   return (
-    <section id="about" className="min-h-screen bg-black text-green-500 font-mono py-20">
+    <section
+      id="about"
+      className="min-h-screen bg-black text-green-500 font-mono py-20"
+    >
       <div className="container mx-auto px-4">
-        {/* Header Bar */}
-        <div className="border border-green-900 p-2 mb-4 flex items-center justify-between bg-black">
-          <div className="flex items-center gap-2">
-            <Terminal size={14} />
-            <span className="text-xs">ABOUT_PROFILE <span className="text-green-600">{`<F2>`}</span></span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Clock size={14} />
-            <span className="text-xs">{new Date().toLocaleTimeString()}</span>
-          </div>
-        </div>
+        <TerminalHeader title="ABOUT_PROFILE" functionKey="<F2>" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Left Panel - Profile Info */}
           <div className="space-y-4">
-            <div className="border border-green-900 p-4 bg-black">
+            <TerminalPanel glowEffect>
               <div className="flex items-center gap-2 mb-4">
                 <User size={14} />
                 <span className="text-xs text-green-600">PERSONAL DETAILS</span>
               </div>
-              <div className="space-y-3 text-xs">
-                <div className="flex justify-between">
-                  <span>NAME</span>
-                  <span className="text-white">VIKTOR ÅGREN</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>ROLE</span>
-                  <span className="text-white">QUANTITATIVE ANALYST</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>LOCATION</span>
-                  <span className="text-white">STOCKHOLM, SWE</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>EMAIL</span>
-                  <span className="text-white truncate">99VIKTOR.AGREN@GMAIL.COM</span>
-                </div>
+              <div className="space-y-3">
+                <DataField label="NAME" value={profileDetails.name} />
+                <DataField label="ROLE" value={profileDetails.role} />
+                <DataField label="LOCATION" value={profileDetails.location} />
+                <DataField
+                  label="EMAIL"
+                  value={profileDetails.email}
+                  className="truncate"
+                />
               </div>
-            </div>
+            </TerminalPanel>
 
             <div className="border border-green-900 p-4 bg-black">
               <div className="flex items-center gap-2 mb-4">
                 <Code size={14} />
-                <span className="text-xs text-green-600">TECHNICAL METRICS</span>
+                <span className="text-xs text-green-600">
+                  TECHNICAL METRICS
+                </span>
               </div>
               <div className="space-y-2 text-xs">
                 {highlights.map((item, index) => (
-                  <div key={index} className="flex justify-between items-center border-b border-green-900/30 pb-2">
+                  <div
+                    key={index}
+                    className="flex justify-between items-center border-b border-green-900/30 pb-2"
+                  >
                     <span>{item.title}</span>
                     <span className="text-white">{item.description}</span>
                   </div>
@@ -101,14 +67,11 @@ export const About = () => {
                 <span className="text-xs text-green-600">PROFILE SUMMARY</span>
               </div>
               <div className="space-y-4 text-xs">
-                <div className="text-white">
-                  DEVELOPER & QUANTITATIVE ANALYST WITH FOCUS ON:
-                </div>
+                <div className="text-white">{profileSummary.title}</div>
                 <ul className="list-disc pl-4 space-y-2 text-white">
-                  <li>Financial mathematics and timeseries Analysis</li>
-                  <li>Complex data analysis and illustration</li>
-                  <li>Scalable software architecture and development</li>
-                  <li>Attribution, risk analysis, and portfolio analysis</li>
+                  {profileSummary.points.map((point, index) => (
+                    <li key={index}>{point}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -116,15 +79,16 @@ export const About = () => {
             <div className="border border-green-900 p-4 bg-black">
               <div className="flex items-center gap-2 mb-4">
                 <Terminal size={14} />
-                <span className="text-xs text-green-600">EXPERIENCE & EXPERTISE</span>
+                <span className="text-xs text-green-600">
+                  EXPERIENCE & EXPERTISE
+                </span>
               </div>
               <div className="text-xs space-y-4">
-                <p className="text-white leading-relaxed">
-                  {`>> TRANSFORMING COMPLEX FINANCIAL DATA INTO ACTIONABLE INVESTMENT INSIGHTS. SPECIALIZED IN QUANTITATIVE ANALYSIS AND PORTFOLIO OPTIMIZATION.`}
-                </p>
-                <p className="text-white leading-relaxed">
-                  {`>> ENGINEERING ROBUST SOFTWARE SOLUTIONS WITH AN EMPHASIS ON MATHEMATICAL PRECISION. DEDICATED TO CLEAN CODE AND SYSTEM RELIABILITY.`}
-                </p>
+                {experience.map((exp, index) => (
+                  <p key={index} className="text-white leading-relaxed">
+                    {`>> ${exp}`}
+                  </p>
+                ))}
               </div>
             </div>
 
@@ -132,11 +96,19 @@ export const About = () => {
             <div className="border border-green-900 p-4 bg-black">
               <div className="flex items-center justify-between">
                 <div className="flex gap-4">
-                  <a href="#projects" className="text-xs hover:text-white">PROJECTS {`<F3>`}</a>
-                  <a href="#contact" className="text-xs hover:text-white">CONTACT {`<F4>`}</a>
-                  <a href="#skills" className="text-xs hover:text-white">SKILLS {`<F5>`}</a>
+                  <a href="#projects" className="text-xs hover:text-white">
+                    PROJECTS {`<F3>`}
+                  </a>
+                  <a href="#contact" className="text-xs hover:text-white">
+                    CONTACT {`<F4>`}
+                  </a>
+                  <a href="#skills" className="text-xs hover:text-white">
+                    SKILLS {`<F5>`}
+                  </a>
                 </div>
-                <div className="text-xs text-green-600">PRESS KEY FOR NAVIGATION</div>
+                <div className="text-xs text-green-600">
+                  PRESS KEY FOR NAVIGATION
+                </div>
               </div>
             </div>
           </div>

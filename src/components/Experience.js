@@ -1,12 +1,12 @@
-import React from 'react';
-import { 
-  Terminal, 
-  Clock, 
+import React from "react";
+import {
+  Terminal,
+  Clock,
   Briefcase,
   Activity,
   Award,
-  ChevronRight
-} from 'lucide-react';
+  ChevronRight,
+} from "lucide-react";
 
 const experiences = [
   {
@@ -17,28 +17,34 @@ const experiences = [
     department: "QUANTITATIVE ANALYSIS",
     location: "STOCKHOLM, SWE",
     metrics: {
-      projectsCompleted: "X",
-      modelsDeployed: "X",
-      teamSize: 3
+      projectsCompleted: "5+",
+      modelsDeployed: "3",
+      teamSize: 3,
     },
     techStack: ["PYTHON", "SQL"],
     responsibilities: [
       "DEVELOPED QUANTITATIVE MODELS FOR FUND SELECTION",
       "INTEGRATED DATA-DRIVEN INSIGHTS INTO DECISION PROCESS",
-      "AUTOMATED ANALYSIS AND REPORTING SYSTEMS"
-    ]
-  }
+      "AUTOMATED ANALYSIS AND REPORTING SYSTEMS",
+    ],
+  },
 ];
 
 export const Experience = () => {
   return (
-    <section id="experience" className="min-h-screen bg-black text-green-500 font-mono py-20">
+    <section
+      id="experience"
+      className="min-h-screen bg-black text-green-500 font-mono py-20"
+    >
       <div className="container mx-auto px-4">
         {/* Terminal Header */}
         <div className="border border-green-900 p-2 mb-4 flex items-center justify-between bg-black">
           <div className="flex items-center gap-2">
             <Terminal size={14} />
-            <span className="text-xs">PROFESSIONAL_EXPERIENCE <span className="text-green-600">{`<F5>`}</span></span>
+            <span className="text-xs">
+              PROFESSIONAL_EXPERIENCE{" "}
+              <span className="text-green-600">{`<F5>`}</span>
+            </span>
           </div>
           <div className="flex items-center gap-2">
             <Clock size={14} />
@@ -78,15 +84,15 @@ export const Experience = () => {
               <div className="text-xs space-y-2">
                 <div className="flex items-center gap-2">
                   <ChevronRight size={12} />
-                  <span>X PROJECTS COMPLETED</span>
+                  <span>5+ PROJECTS COMPLETED</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ChevronRight size={12} />
-                  <span>X MODELS DEPLOYED</span>
+                  <span>3 MODELS DEPLOYED</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ChevronRight size={12} />
-                  <span>X TEAM COLLABORATIONS</span>
+                  <span>3+ TEAM COLLABORATIONS</span>
                 </div>
               </div>
             </div>
@@ -101,7 +107,9 @@ export const Experience = () => {
                   <div className="flex justify-between items-center mb-2">
                     <div className="flex items-center gap-2">
                       <Activity size={14} className="text-green-500" />
-                      <span className="text-xs text-white font-bold">{exp.title}</span>
+                      <span className="text-xs text-white font-bold">
+                        {exp.title}
+                      </span>
                     </div>
                     <span className="text-xs text-green-400">{exp.status}</span>
                   </div>
@@ -126,7 +134,7 @@ export const Experience = () => {
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2">
                     {exp.techStack.map((tech, idx) => (
-                      <span 
+                      <span
                         key={idx}
                         className="px-2 py-1 text-xs bg-green-900/20 text-green-500"
                       >
@@ -137,10 +145,15 @@ export const Experience = () => {
 
                   {/* Responsibilities */}
                   <div className="space-y-2">
-                    <span className="text-xs text-green-600">KEY RESPONSIBILITIES:</span>
+                    <span className="text-xs text-green-600">
+                      KEY RESPONSIBILITIES:
+                    </span>
                     <div className="grid gap-2">
                       {exp.responsibilities.map((resp, idx) => (
-                        <div key={idx} className="text-xs flex items-center gap-2">
+                        <div
+                          key={idx}
+                          className="text-xs flex items-center gap-2"
+                        >
                           <ChevronRight size={12} />
                           <span className="text-white">{resp}</span>
                         </div>
@@ -152,7 +165,9 @@ export const Experience = () => {
                   <div className="grid grid-cols-3 gap-4 pt-4 border-t border-green-900/30">
                     {Object.entries(exp.metrics).map(([key, value], idx) => (
                       <div key={idx} className="text-xs">
-                        <span className="text-green-600">{key.toUpperCase()}: </span>
+                        <span className="text-green-600">
+                          {key.toUpperCase()}:{" "}
+                        </span>
                         <span className="text-white">{value}</span>
                       </div>
                     ))}

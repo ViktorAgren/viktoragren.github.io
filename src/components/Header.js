@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Terminal, Clock, Menu, X, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Terminal, Clock, Menu, X, ChevronRight } from "lucide-react";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,9 +15,9 @@ export const Header = () => {
       setTime(new Date());
     }, 1000);
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       clearInterval(timer);
     };
   }, []);
@@ -25,7 +25,7 @@ export const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-mono ${
-        scrolled ? 'translate-y-0' : '-translate-y-full'
+        scrolled ? "translate-y-0" : "-translate-y-full"
       }`}
     >
       <div className="border-b border-green-900 bg-black/95 backdrop-blur-sm">
@@ -39,22 +39,26 @@ export const Header = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={14} className="text-green-500" />
-                <span className="text-green-500 text-xs">{time.toLocaleTimeString()}</span>
+                <span className="text-green-500 text-xs">
+                  {time.toLocaleTimeString()}
+                </span>
               </div>
             </div>
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex items-center gap-6">
-              {['HOME', 'ABOUT', 'SKILLS', 'PROJECTS', 'CONTACT'].map((item) => (
-                <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase()}`}
-                    className="text-xs text-green-500 hover:text-white transition-colors"
-                  >
-                    {item} {`<${item[0]}>`}
-                  </a>
-                </li>
-              ))}
+              {["HOME", "ABOUT", "SKILLS", "PROJECTS", "CONTACT"].map(
+                (item) => (
+                  <li key={item}>
+                    <a
+                      href={`#${item.toLowerCase()}`}
+                      className="text-xs text-green-500 hover:text-white transition-colors"
+                    >
+                      {item} {`<${item[0]}>`}
+                    </a>
+                  </li>
+                ),
+              )}
               <li>
                 <a
                   href="/resume.pdf"
@@ -78,18 +82,20 @@ export const Header = () => {
           {isMenuOpen && (
             <div className="md:hidden border-t border-green-900 bg-black/95 backdrop-blur-sm">
               <ul className="py-4 px-4 space-y-2">
-                {['HOME', 'ABOUT', 'SKILLS', 'PROJECTS', 'CONTACT'].map((item) => (
-                  <li key={item}>
-                    <a
-                      href={`#${item.toLowerCase()}`}
-                      className="flex items-center gap-2 text-xs text-green-500 hover:text-white transition-colors"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <ChevronRight size={12} />
-                      {item}
-                    </a>
-                  </li>
-                ))}
+                {["HOME", "ABOUT", "SKILLS", "PROJECTS", "CONTACT"].map(
+                  (item) => (
+                    <li key={item}>
+                      <a
+                        href={`#${item.toLowerCase()}`}
+                        className="flex items-center gap-2 text-xs text-green-500 hover:text-white transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <ChevronRight size={12} />
+                        {item}
+                      </a>
+                    </li>
+                  ),
+                )}
                 <li className="pt-2 border-t border-green-900/50">
                   <a
                     href="/resume.pdf"
