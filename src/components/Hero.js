@@ -229,10 +229,27 @@ export const Hero = () => {
     }
   }, [terminalOutput]);
 
+  // Ensure Hero is the landing page by forcing scroll to top on mount
+  useEffect(() => {
+    const forceScrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+    
+    forceScrollToTop();
+    
+    // Additional safety timeout
+    const timeout = setTimeout(forceScrollToTop, 100);
+    
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <section
       id="home"
-      className="min-h-screen bg-black text-green-500 font-mono relative"
+      className="min-h-screen bg-black text-green-500 font-mono relative top-0"
+      style={{ scrollMarginTop: 0 }}
     >
       {/* Terminal Header */}
       <div className="border-b border-green-900 p-2 flex justify-between items-center bg-black">

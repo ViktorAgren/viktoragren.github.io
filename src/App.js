@@ -58,19 +58,37 @@ const AppContent = () => {
   useKeyboardNavigation();
 
   useEffect(() => {
+    // Disable scroll restoration immediately
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // Force scroll to top immediately and repeatedly
+    const scrollToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    // Initial scroll to top
+    scrollToTop();
+    
+    // Force scroll to top again after a short delay (in case components are still loading)
+    const timeouts = [
+      setTimeout(scrollToTop, 100),
+      setTimeout(scrollToTop, 300),
+      setTimeout(scrollToTop, 500),
+    ];
+
     AOS.init({
       duration: 800,
       easing: "ease-out-cubic",
       once: true,
     });
 
-    // Ensure page starts at the top (Hero section)
-    window.scrollTo(0, 0);
-    
-    // Prevent scroll restoration
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
+    return () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+    };
   }, []);
 
   // Render terminal mode
