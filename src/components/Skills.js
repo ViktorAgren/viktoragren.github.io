@@ -66,7 +66,7 @@ const CategorySelector = ({ categories, activeCategory, onCategoryChange }) => (
   <div className="border border-green-900 p-4 bg-black">
     <div className="flex items-center gap-2 mb-4">
       <Database size={14} />
-      <span className="text-xs text-green-600">SKILL CATEGORIES</span>
+      <span className="text-xs text-green-600">CATEGORIES</span>
     </div>
     <div className="space-y-2">
       {categories.map((category) => (
@@ -107,16 +107,6 @@ export const Skills = () => {
             <span className="text-xs">
               SKILL_MATRIX <span className="text-green-600">{`<F3>`}</span>
             </span>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Activity size={14} />
-              <span className="text-xs">MATRIX ACTIVE</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock size={14} />
-              <span className="text-xs">{new Date().toLocaleTimeString()}</span>
-            </div>
           </div>
         </div>
 

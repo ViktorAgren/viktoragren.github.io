@@ -21,11 +21,12 @@ const experiences = [
       modelsDeployed: "3",
       teamSize: 3,
     },
-    techStack: ["PYTHON", "SQL"],
+    techStack: ["PYTHON", "SQL", "POWER BI"],
     responsibilities: [
       "DEVELOPED QUANTITATIVE MODELS FOR FUND SELECTION",
       "INTEGRATED DATA-DRIVEN INSIGHTS INTO DECISION PROCESS",
       "AUTOMATED ANALYSIS AND REPORTING SYSTEMS",
+      "MUTUAL FUND TRADING ANALYSIS (4M+ TRADES)"
     ],
   },
 ];
@@ -46,10 +47,6 @@ export const Experience = () => {
               <span className="text-green-600">{`<F5>`}</span>
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock size={14} />
-            <span className="text-xs">{new Date().toLocaleTimeString()}</span>
-          </div>
         </div>
 
         <div className="grid grid-cols-12 gap-4">
@@ -63,7 +60,7 @@ export const Experience = () => {
               <div className="space-y-2 text-xs">
                 <div className="flex justify-between">
                   <span>TOTAL EXP</span>
-                  <span className="text-white">1+ YRS</span>
+                  <span className="text-white">2+ YRS</span>
                 </div>
                 <div className="flex justify-between">
                   <span>POSITIONS</span>
@@ -76,26 +73,6 @@ export const Experience = () => {
               </div>
             </div>
 
-            <div className="border border-green-900 p-4 bg-black">
-              <div className="flex items-center gap-2 mb-4">
-                <Award size={14} />
-                <span className="text-xs text-green-600">ACHIEVEMENTS</span>
-              </div>
-              <div className="text-xs space-y-2">
-                <div className="flex items-center gap-2">
-                  <ChevronRight size={12} />
-                  <span>5+ PROJECTS COMPLETED</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ChevronRight size={12} />
-                  <span>3 MODELS DEPLOYED</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ChevronRight size={12} />
-                  <span>3+ TEAM COLLABORATIONS</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Main Experience Timeline */}
@@ -176,14 +153,7 @@ export const Experience = () => {
               </div>
             ))}
 
-            {/* Command Line */}
-            <div className="border border-green-900 p-4 bg-black">
-              <div className="text-xs space-y-2">
-                <p>{`>> Type "EXP <company>" for detailed view`}</p>
-                <p>{`>> Type "METRICS" for performance analysis`}</p>
-                <p>{`>> Type "TIMELINE" for career progression`}</p>
-              </div>
-            </div>
+          
           </div>
         </div>
       </div>

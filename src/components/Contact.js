@@ -82,7 +82,7 @@ export const Contact = () => {
   const [terminalOutput, setTerminalOutput] = useState([
     { type: "info", text: "Initializing secure connection..." },
     { type: "success", text: "✓ SSH connection established" },
-    { type: "info", text: "Welcome to VIKTOR_CONTACT_PORTAL v2.0.0" },
+    { type: "info", text: "Welcome to CONTACT_PORTAL v2.0.0" },
     { type: "info", text: 'Type "help" for available commands' },
   ]);
   const outputRef = useRef(null);
@@ -141,7 +141,6 @@ export const Contact = () => {
         "  social            - Show social media links",
         "  location          - Display current location",
         "  availability      - Check current availability",
-        "  skills            - Quick skills overview",
         "  download          - Download contact vCard",
         "  ssh viktor        - Initiate contact session",
         "  scan              - Network diagnostic scan",
@@ -208,22 +207,6 @@ export const Contact = () => {
       }
     }),
 
-    skills: () => ({
-      type: "skills",
-      text: [
-        "TECHNICAL SKILLS OVERVIEW:",
-        "",
-        "▓▓▓▓▓▓▓▓▓▓ Python         100%",
-        "▓▓▓▓▓▓▓▓░░ JavaScript     80%", 
-        "▓▓▓▓▓▓▓▓▓░ SQL           90%",
-        "▓▓▓▓▓▓▓░░░ React         70%",
-        "▓▓▓▓▓▓▓▓▓░ Git           90%",
-        "▓▓▓▓▓▓▓▓░░ C#            80%",
-        "",
-        "Type 'cd skills' to see full portfolio"
-      ]
-    }),
-
     download: () => {
       // Simulate vCard download
       const vCardData = `BEGIN:VCARD
@@ -260,7 +243,7 @@ END:VCARD`;
             "Host key fingerprint is SHA256:aB3dE5gH7jK9mN2pQ4rS6tU8vW0xY2z",
             "✓ Connection established",
             "",
-            "Welcome to Viktor's secure contact channel!",
+            "Secure contact channel!",
             "This is a direct line for:",
             "- Job opportunities",
             "- Project collaborations", 
@@ -305,7 +288,7 @@ END:VCARD`;
     const argString = args.join(" ");
 
     // Add command to output
-    addToOutput({ type: "command", text: `viktor@contact:~$ ${cmd}` });
+    addToOutput({ type: "command", text: `contact:~$ ${cmd}` });
 
     // Add to history
     if (cmd.trim()) {
@@ -536,17 +519,6 @@ END:VCARD`;
                 <span>{networkLatency}ms</span>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Clock size={12} />
-                <span className="hidden sm:inline">{currentTime.toLocaleTimeString()}</span>
-                <span className="sm:hidden">{currentTime.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Globe size={12} />
-                <span>CET (UTC+1)</span>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -557,12 +529,10 @@ END:VCARD`;
             <div className="flex items-center gap-2">
               <Terminal size={14} />
               <span className="text-xs">
-                VIKTOR_CONTACT_PORTAL <span className="text-green-600">{`<F6>`}</span>
+                 CONTACT_PORTAL <span className="text-green-600">{`<F6>`}</span>
               </span>
             </div>
             <div className="flex items-center gap-2 text-xs">
-              <span className="text-green-600">ssh://</span>
-              <span className="break-all">viktor@contact.dev</span>
             </div>
           </div>
 
@@ -587,7 +557,7 @@ END:VCARD`;
             {/* Terminal Input */}
             <div className="border-t border-green-900 p-2 sm:p-4">
               <div className="flex items-center gap-2">
-                <span className="text-green-400 text-xs sm:text-sm whitespace-nowrap">viktor@contact:~$</span>
+                <span className="text-green-400 text-xs sm:text-sm whitespace-nowrap">contact:~$</span>
                 <input
                   ref={inputRef}
                   type="text"

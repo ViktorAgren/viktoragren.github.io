@@ -12,22 +12,6 @@ export const Footer = () => {
               <div className="w-2 h-2 rounded-full bg-green-500"></div>
               <span className="text-green-500">SYSTEM_ACTIVE</span>
             </div>
-            <div className="flex items-center gap-2 text-green-500">
-              <Terminal size={12} />
-              <span>VA_TERMINAL v1.0.0</span>
-            </div>
-          </div>
-
-          {/* Center Status */}
-          <div className="flex items-center gap-4 text-green-500">
-            <div className="flex items-center gap-2">
-              <Activity size={12} />
-              <span>UPTIME: 99.9%</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Wifi size={12} />
-              <span>CONNECTED</span>
-            </div>
           </div>
 
           {/* Right Side - Copyright */}

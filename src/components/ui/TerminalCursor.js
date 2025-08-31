@@ -26,11 +26,6 @@ export const TerminalHeader = ({ title, functionKey, showTime = true }) => (
         {title} <span className="text-green-600">{functionKey}</span>
       </span>
     </div>
-    {showTime && (
-      <div className="flex items-center gap-2">
-        <span className="text-xs">{new Date().toLocaleTimeString()}</span>
-      </div>
-    )}
   </div>
 );
 

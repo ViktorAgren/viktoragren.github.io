@@ -17,17 +17,7 @@ export const highlights = [
     icon: <Book className="w-5 h-5 text-green-500" />,
     title: "EDUCATION",
     description: "MSC FINANCIAL MATHEMATICS",
-  },
-  {
-    icon: <Briefcase className="w-5 h-5 text-green-500" />,
-    title: "PROJECTS",
-    description: "10+ COMPLETED",
-  },
-  {
-    icon: <GraduationCap className="w-5 h-5 text-green-500" />,
-    title: "EXPERTISE",
-    description: "QUANTITATIVE MODELING",
-  },
+  }
 ];
 
 export const profileSummary = {

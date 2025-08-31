@@ -35,7 +35,7 @@ export const Header = () => {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <Terminal size={14} className="text-green-500" />
-                <span className="text-green-500 text-xs">SYSTEM_ACTIVE</span>
+                <span className="text-green-500 text-xs"></span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={14} className="text-green-500" />

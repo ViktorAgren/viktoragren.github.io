@@ -13,8 +13,8 @@ export const Hero = () => {
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [terminalOutput, setTerminalOutput] = useState([
-    { type: "info", text: "Welcome to VIKTOR_TERMINAL v1.0.0" },
-    { type: "info", text: 'Type "help" to see available commands or "terminal" for full mode' },
+    { type: "info", text: "Welcome to DEV_TERMINAL v1.0.0" },
+    { type: "info", text: 'Type "help" to see available commands' },
   ]);
 
   // Terminal commands system
@@ -36,9 +36,7 @@ export const Hero = () => {
         "  date        - Show current date and time",
         "  uptime      - Show portfolio uptime",
         "  terminal    - Enter full-screen terminal mode",
-        "",
-        "Use arrow keys (↑↓) to navigate command history",
-        "Press Ctrl+T to toggle full terminal mode",
+        ""
       ],
     }),
     about: () => ({
@@ -47,7 +45,7 @@ export const Hero = () => {
         "VIKTOR ÅGREN - Quantitative Analyst & Software Developer",
         "Location: Stockholm, Sweden",
         "Education: MSc Financial Mathematics",
-        "Experience: 1+ years in quantitative finance",
+        "Experience: 2+ years in quantitative finance",
         "Specialization: Financial modeling, data analysis, software architecture",
       ],
     }),
@@ -68,8 +66,7 @@ export const Hero = () => {
         "Recent Projects:",
         "  [1] Black-Scholes Option Calculator - Financial modeling tool",
         "  [2] FPL Analytics Dashboard - Data visualization platform",
-        "  [3] Mathematical Journal - LaTeX publishing system",
-        "Use 'cd projects' to explore projects section",
+        "  [3] Mathematical Journal - LaTeX publishing system"
       ],
     }),
     contact: () => ({
@@ -84,11 +81,11 @@ export const Hero = () => {
     }),
     whoami: () => ({
       type: "info",
-      text: "viktor@portfolio:~$ Quantitative Analyst & Developer",
+      text: "Viktor",
     }),
     ls: () => ({
       type: "info",
-      text: ["about.md  projects/  skills.json  contact.txt  resume.pdf"],
+      text: ["about  projects  skills  contact"],
     }),
     clear: () => {
       setTerminalOutput([]);
@@ -132,7 +129,7 @@ export const Hero = () => {
     }),
     uptime: () => ({
       type: "info",
-      text: "Portfolio uptime: 99.9% | Last deployed: 2024-12",
+      text: "Portfolio uptime: 99.9% | Last deployed: 2025-07",
     }),
     terminal: () => {
       enterTerminalMode();
@@ -147,7 +144,7 @@ export const Hero = () => {
     // Add command to output
     setTerminalOutput((prev) => [
       ...prev,
-      { type: "command", text: `viktor@portfolio:~$ ${cmd}` },
+      { type: "command", text: `portfolio:~$ ${cmd}` },
     ]);
 
     // Add to history
@@ -203,7 +200,9 @@ export const Hero = () => {
       strings: [
         "Software Developer",
         "Quantitative Analyst",
-        "Financial Mathematics Graduate",
+        "Applied Mathematics Graduate",
+        "Data Scientist",
+        "Financial Modeler"
       ],
       typeSpeed: 50,
       backSpeed: 30,
@@ -255,7 +254,7 @@ export const Hero = () => {
       <div className="border-b border-green-900 p-2 flex justify-between items-center bg-black">
         <div className="flex items-center gap-3">
           <Terminal size={16} />
-          <span>VIK {`<GO>`}</span>
+
         </div>
         <div className="flex items-center gap-4 text-sm">
           <div className="flex items-center gap-2">
@@ -275,7 +274,6 @@ export const Hero = () => {
         <div className="col-span-3 space-y-1">
           <div className="border border-green-900 p-3 bg-black">
             <h2 className="text-xs mb-2 text-green-600">PROFILE</h2>
-            <p className="text-sm mb-4">{`>>DEVELOPER`}</p>
             <div className="space-y-2 text-xs">
               <div className="flex justify-between">
                 <span>NAME</span>
@@ -291,40 +289,17 @@ export const Hero = () => {
               </div>
             </div>
           </div>
-
-          <div className="border border-green-900 p-3 bg-black">
-            <h2 className="text-xs mb-2 text-green-600">METRICS</h2>
-            <div className="space-y-2 text-xs">
-              <div className="flex justify-between">
-                <span>YOE</span>
-                <span className="text-white">1+</span>
-              </div>
-              <div className="flex justify-between">
-                <span>PROJ</span>
-                <span className="text-white">10+</span>
-              </div>
-              <div className="flex justify-between">
-                <span>TECH</span>
-                <span className="text-white">15+</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Main Terminal Area */}
         <div className="col-span-9 space-y-1">
           <div className="border border-green-900 p-4 bg-black h-[calc(100vh-8rem)]">
             <div className="flex items-center gap-2 mb-6">
-              <Activity size={16} />
-              <span className="text-sm">TERMINAL ACTIVE</span>
             </div>
 
             <div className="mb-8">
-              <p className="text-xs text-green-600 mb-1">CMD:</p>
-              <h1 className="text-2xl text-white font-bold mb-2">
-                VIKTOR ÅGREN
-              </h1>
-              <div className="text-sm mb-4">
+              <p className="text-xs text-green-600 mb-1"></p>
+              <div className="text-2xl mb-4">
                 I'm a <span ref={typedRef} className="text-white"></span>
               </div>
             </div>
@@ -388,7 +363,7 @@ export const Hero = () => {
             {/* Terminal Input */}
             <div className="flex items-center gap-2 border-t border-green-900 pt-2">
               <span className="text-green-400 text-xs">
-                viktor@portfolio:~$
+                portfolio:~$
               </span>
               <input
                 ref={terminalInputRef}

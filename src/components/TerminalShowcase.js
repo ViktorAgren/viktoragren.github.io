@@ -15,7 +15,7 @@ export const TerminalShowcase = () => {
     {
       type: "info",
       content: [
-        "Welcome to Trading Terminal v1.0.0",
+        "Welcome to trading_terminal v1.0.0",
         'Type "help" to see available commands',
         'Type "trade start" to begin simulation',
       ],
@@ -316,7 +316,7 @@ export const TerminalShowcase = () => {
         "clear            - Clear terminal",
         "",
         "Market Data:",
-        "Current: BTC/USD Professional Trading Terminal",
+        "Current: BTC/USD",
         "Use arrow keys (↑↓) to navigate command history",
       ],
     }),
@@ -633,18 +633,6 @@ export const TerminalShowcase = () => {
               TRADING_TERMINAL <span className="text-green-600">{`<F1>`}</span>
             </span>
           </div>
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Activity size={14} />
-              <span className="text-xs">
-                {isTrading ? "LIVE TRADING" : "SYSTEM IDLE"}
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock size={14} />
-              <span className="text-xs">{new Date().toLocaleTimeString()}</span>
-            </div>
-          </div>
         </div>
 
         {/* TradingView Professional Chart */}
@@ -946,7 +934,6 @@ export const TerminalShowcase = () => {
               <div className="flex gap-4">
                 <span>Market: <span className={`font-bold ${isTrading ? 'text-green-400' : 'text-yellow-400'}`}>{isTrading ? 'LIVE' : 'PAUSED'}</span></span>
                 <span>Updates: <span className="text-white">2s</span></span>
-                <span>Source: <span className="text-white">TradingView</span></span>
               </div>
             </div>
           </div>

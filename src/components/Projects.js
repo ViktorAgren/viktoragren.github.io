@@ -31,10 +31,6 @@ export const Projects = () => {
               PROJECT_PORTFOLIO <span className="text-green-600">{`<F4>`}</span>
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <Clock size={14} />
-            <span className="text-xs">{new Date().toLocaleTimeString()}</span>
-          </div>
         </div>
 
         {/* Project Status Overview */}
@@ -63,26 +59,6 @@ export const Projects = () => {
               </div>
             </div>
 
-            <div className="border border-green-900 p-4 bg-black">
-              <div className="flex items-center gap-2 mb-4">
-                <Activity size={14} />
-                <span className="text-xs text-green-600">PROJECT METRICS</span>
-              </div>
-              <div className="space-y-2 text-xs">
-                <div className="flex justify-between">
-                  <span>TOTAL PROJECTS</span>
-                  <span className="text-white">3</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>AVG UPTIME</span>
-                  <span className="text-white">98.7%</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>ACTIVE DEVS</span>
-                  <span className="text-white">1</span>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Main Project Grid */}
@@ -176,14 +152,6 @@ export const Projects = () => {
               </div>
             ))}
 
-            {/* Command Line */}
-            <div className="border border-green-900 p-4 bg-black">
-              <div className="text-xs space-y-2">
-                <p>{`>> Type "PROJECT <name>" for detailed analysis`}</p>
-                <p>{`>> Type "COMPARE" to compare projects`}</p>
-                <p>{`>> Type "DOCS" for documentation`}</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
