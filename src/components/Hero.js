@@ -304,32 +304,9 @@ export const Hero = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="border border-green-900 p-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <Monitor size={14} />
-                  <span className="text-xs">TECH STACK</span>
-                </div>
-                <div className="text-xs space-y-1">
-                  <p>PYTHON • SQL • GIT</p>
-                  <p>R • Matlab • C#</p>
-                </div>
-              </div>
-
-              <div className="border border-green-900 p-3">
-                <div className="flex items-center gap-2 mb-2">
-                  <Cpu size={14} />
-                  <span className="text-xs">SPECIALIZATION</span>
-                </div>
-                <div className="text-xs space-y-1">
-                  <p>QUANTITATIVE ANALYSIS</p>
-                  <p>FINANCIAL MATHEMATICS</p>
-                </div>
-              </div>
-            </div>
 
             {/* Terminal Output */}
-            <div ref={terminalOutputRef} className="mb-4 h-52 overflow-y-auto text-xs">
+            <div ref={terminalOutputRef} className="mb-80 h-52 overflow-y-auto text-xs">
               {terminalOutput.map((output, index) => (
                 <div key={index} className="mb-1">
                   {output.type === "command" && (
